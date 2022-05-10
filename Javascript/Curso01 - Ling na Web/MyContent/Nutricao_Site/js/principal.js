@@ -12,10 +12,23 @@ Number.prototype.round = function(n) {
 let listOfPatients = document.querySelectorAll(".paciente");
 for(let i = 0; i < listOfPatients.length; i++)
 {
-    let pesoTocalc = listOfPatients[i].querySelector(".info-peso").textContent;
+    let pesoToCalc = listOfPatients[i].querySelector(".info-peso").textContent;
     let alturaToCalc = listOfPatients[i].querySelector(".info-altura").textContent;
-    let imc = pesoTocalc / (alturaToCalc * alturaToCalc);
-    listOfPatients[i].querySelector(".info-imc").textContent = imc.toFixed(2);
+    let errorFounded = false;
+    if(pesoToCalc < 0 || pesoToCalc > 1000){
+        console.log("Its " + pesoToCalc + " an error");
+        errorFounded = true;
+    }
+    if(alturaToCalc < 0 || alturaToCalc > 3){
+        console.log("Its " + alturaToCalc + " an error");
+        errorFounded = true;
+    }
+    let calcImc = pesoToCalc / (alturaToCalc * alturaToCalc)
+    if(errorFounded)
+    {
+        listOfPatients[i].classList.add("informacao-incorreta")
+    }
+    listOfPatients[i].querySelector(".info-imc").textContent = errorFounded ? "Informação Incorreta" : calcImc.toFixed(2);
 }
 
 
