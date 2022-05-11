@@ -31,5 +31,60 @@ for(let i = 0; i < listOfPatients.length; i++)
     listOfPatients[i].querySelector(".info-imc").textContent = errorFounded ? "Informação Incorreta" : calcImc.toFixed(2);
 }
 
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
+botaoAdicionar.addEventListener("click", function(event) {
+    //Muito importante isso para prevenir o comportamento padrão do botão (dar um reload boaldo)
+    event.preventDefault();
+    var form = document.querySelector("#form-adiciona");
+    //o form vem tipo um objeto, com cada input sendo uma 
+    //informação, que pode ser acessada através do seu nome (.name)
+    //Importante retornar o Value do valor do input
+    //Diferente do textContent dos elementos normalmente
+    var nome = form.nome.value;
+    var peso = form.peso.value;
+    var altura = form.altura.value;
+    var gordura = form.gordura.value;
+    //Criando um elemento, mas não vai pra pagina
+    //Tr = Table Row || Linha da Tabela
+    var pacienteTr = document.createElement("tr");
+    //Td = Table Data || Data da linha
+    var nomeTd = document.createElement("td");
+    var pesoTd = document.createElement("td");
+    var alturaTd = document.createElement("td");
+    var gorduraTd = document.createElement("td");
+    var imcTd = document.createElement("td");
+
+    nomeTd.textContent = nome;
+    pesoTd.textContent = peso;
+    alturaTd.textContent = altura;
+    gorduraTd.textContent = gordura;
+    imcTd.textContent = (peso / (altura * altura)).toFixed(2);
+
+    pacienteTr.appendChild(nomeTd);
+    pacienteTr.appendChild(pesoTd);
+    pacienteTr.appendChild(alturaTd);
+    pacienteTr.appendChild(gorduraTd);
+    pacienteTr.appendChild(imcTd);
+
+    var tabela = document.querySelector("#tabela-pacientes");
+
+    tabela.appendChild(pacienteTr);
+
+});
+/**
+ * 
+ 
+ * mouse events (MouseEvent): mousedown, mouseup, click, dblclick, mousemove, mouseover, mousewheel, mouseout, contextmenu
+
+ * touch events (TouchEvent): touchstart, touchmove, touchend, touchcancel
+
+ * keyboard events (KeyboardEvent): keydown, keypress, keyup
+
+ * form events: focus, blur, change, submit
+
+ * window events: scroll, resize, hashchange, load, unload
+
+ * 
+ */
 
 
