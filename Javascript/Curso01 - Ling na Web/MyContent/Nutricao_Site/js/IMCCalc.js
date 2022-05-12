@@ -39,7 +39,7 @@ function calculaIMC(peso,altura)
 function validaPeso(peso)
 {
     let errorFounded = false;
-    if(peso.length <=0 || peso < 0 || peso > 1000){
+    if( peso < 0 || peso >= 1000){
         errorFounded = true;
     }
     return errorFounded;
@@ -47,7 +47,7 @@ function validaPeso(peso)
 function validaAltura(altura)
 {
     let errorFounded = false;
-    if(altura.length <= 0 || altura < 0 || altura > 3){
+    if( altura < 0 || altura >= 3){
         errorFounded = true;
     }
     return errorFounded;

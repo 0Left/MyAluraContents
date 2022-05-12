@@ -23,19 +23,16 @@ botaoAdicionar.addEventListener("click", function(event) {
     let paciente = obtemPacienteDoForm(form);
     let erros = validaPaciente(paciente)
     if(erros.length > 0){
-        let status = document.querySelector("#status-message");
-        let errorString = "";
-        for(let i = 0; i < erros.length; i++)
-        {
-            errorString += erros[i] + " e ";
-        }
-        status.textContent = errorString.slice(0,-3) + "!";
+        exibeMensagensDeErro(erros);
         return;
     }
 
     let pacienteTr = MontarTr(paciente);
 
     let tabela = document.querySelector("#tabela-pacientes");
+
+    let ul = document.querySelector("#status-message");
+    ul.innerHTML = "";
 
     tabela.appendChild(pacienteTr);
     
@@ -84,21 +81,26 @@ function montarTd(dado,classe)
     td.classList.add(classe);
     return td;
 }
-
+function exibeMensagensDeErro(erros)
+{
+    let ul = document.querySelector("#status-message");
+    ul.innerHTML = "";
+    erros.forEach(function(erro){
+        let li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    })
+}
 
 function validaPaciente(paciente)
 {
     let erros = [];
-    if(validaPeso(paciente.peso))
-    {
-        erros.push("Peso é inválido");
-    }  
-    if(validaAltura(paciente.altura))
-    {
-        erros.push("Altura é inválida");
-    }
-
+    if(validaPeso(paciente.peso) || isNaN(paciente.peso)) erros.push("Peso é inválido");  
+    if(validaAltura(paciente.altura) || isNaN(paciente.altura)) erros.push("Altura é inválida");
+    if(paciente.nome.length == 0) erros.push("O Nome Está Vazio");
+    if(paciente.altura.length == 0) erros.push("A Altura Está Vazia");
+    if(paciente.peso.length == 0) erros.push("O Peso Está Vazio");
+    if(paciente.gordura.length == 0) erros.push("A Gordura Está Vazia");
     return erros;
-    
 
 }
