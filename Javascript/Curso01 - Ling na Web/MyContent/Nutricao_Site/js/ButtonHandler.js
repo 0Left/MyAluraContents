@@ -28,7 +28,6 @@ botaoAdicionar.addEventListener("click", function(event) {
     }
 
     let pacienteTr = MontarTr(paciente);
-
     let tabela = document.querySelector("#tabela-pacientes");
 
     let ul = document.querySelector("#status-message");
