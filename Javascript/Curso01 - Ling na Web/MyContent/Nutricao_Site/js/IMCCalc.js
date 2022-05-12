@@ -15,10 +15,10 @@ for(let i = 0; i < listOfPatients.length; i++)
     let pesoToCalc = listOfPatients[i].querySelector(".info-peso").textContent;
     let alturaToCalc = listOfPatients[i].querySelector(".info-altura").textContent;
     let errorFounded = false;
-    if(pesoToCalc < 0 || pesoToCalc > 1000){
+    if(validaPeso(pesoToCalc)){
         errorFounded = true;
     }
-    if(alturaToCalc < 0 || alturaToCalc > 3){
+    if(validaAltura(alturaToCalc)){
         errorFounded = true;
     }
     let calcImc = calculaIMC(pesoToCalc,alturaToCalc);
@@ -36,3 +36,19 @@ function calculaIMC(peso,altura)
 }
 
 
+function validaPeso(peso)
+{
+    let errorFounded = false;
+    if(peso.length <=0 || peso < 0 || peso > 1000){
+        errorFounded = true;
+    }
+    return errorFounded;
+}
+function validaAltura(altura)
+{
+    let errorFounded = false;
+    if(altura.length <= 0 || altura < 0 || altura > 3){
+        errorFounded = true;
+    }
+    return errorFounded;
+}

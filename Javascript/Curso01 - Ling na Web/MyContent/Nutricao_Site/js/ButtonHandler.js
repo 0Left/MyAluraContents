@@ -18,17 +18,29 @@ var botaoAdicionar = document.querySelector("#adicionar-paciente");
 botaoAdicionar.addEventListener("click", function(event) {
     event.preventDefault();
 
-    var form = document.querySelector("#form-adiciona");
+    let form = document.querySelector("#form-adiciona");
 
-    var paciente = obtemPacienteDoForm(form);
+    let paciente = obtemPacienteDoForm(form);
+    let erros = validaPaciente(paciente)
+    if(erros.length > 0){
+        let status = document.querySelector("#status-message");
+        let errorString = "";
+        for(let i = 0; i < erros.length; i++)
+        {
+            errorString += erros[i] + " e ";
+        }
+        status.textContent = errorString.slice(0,-3) + "!";
+        return;
+    }
 
-    var pacienteTr = MontarTr(paciente);
+    let pacienteTr = MontarTr(paciente);
 
-    var tabela = document.querySelector("#tabela-pacientes");
+    let tabela = document.querySelector("#tabela-pacientes");
 
     tabela.appendChild(pacienteTr);
-
+    
     form.reset();
+
 
 });
 
@@ -62,7 +74,7 @@ function MontarTr(paciente)
         trBase.classList.add("informacao-incorreta");
     }
 
-    return trBase
+    return trBase;
 }
 
 function montarTd(dado,classe)
@@ -71,4 +83,22 @@ function montarTd(dado,classe)
     td.textContent = dado;
     td.classList.add(classe);
     return td;
+}
+
+
+function validaPaciente(paciente)
+{
+    let erros = [];
+    if(validaPeso(paciente.peso))
+    {
+        erros.push("Peso é inválido");
+    }  
+    if(validaAltura(paciente.altura))
+    {
+        erros.push("Altura é inválida");
+    }
+
+    return erros;
+    
+
 }
