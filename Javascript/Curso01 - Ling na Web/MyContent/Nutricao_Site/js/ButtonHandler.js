@@ -5,7 +5,7 @@
 
  * touch events (TouchEvent): touchstart, touchmove, touchend, touchcancel
 
- * keyboard events (KeyboardEvent): keydown, keypress, keyup
+ * keyboard events (KeyboardEvent): keydown, keypress, keyup, Input
 
  * form events: focus, blur, change, submit
 
