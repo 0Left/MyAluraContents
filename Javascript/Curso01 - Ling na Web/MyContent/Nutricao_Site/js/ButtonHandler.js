@@ -27,19 +27,20 @@ botaoAdicionar.addEventListener("click", function(event) {
         return;
     }
 
-    let pacienteTr = MontarTr(paciente);
-    let tabela = document.querySelector("#tabela-pacientes");
-
+    montaPacienteEColocaNaTabela(paciente);
+    
     let ul = document.querySelector("#status-message");
     ul.innerHTML = "";
-
-    tabela.appendChild(pacienteTr);
-    
     form.reset();
 
 
 });
-
+function montaPacienteEColocaNaTabela(paciente)
+{
+    let pacienteTr = MontarTr(paciente);
+    let tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 function obtemPacienteDoForm(form)
 {
